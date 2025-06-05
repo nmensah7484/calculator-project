@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .calculator {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      padding: 20px;
+    }
+    .display {
+      background: #000;
+      color: #0f0;
+      font-size: 2rem;
+      padding: 10px;
+      text-align: right;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    button {
+      font-size: 1.2rem;
+      padding: 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button.operator {
+      background: #ff9500;
+      color: white;
+    }
+    button.equal {
+      background: #34c759;
+      color: white;
+    }
+    button.clear {
+      background: #ff3b30;
+      color: white;
+    }
+    .footer {
+      margin-top: 15px;
+      font-size: 0.8rem;
+      text-align: center;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div id="display" class="display">0</div>
+    <div class="buttons">
+      <button onclick="appendNumber('7')">7</button>
+      <button onclick="appendNumber('8')">8</button>
+      <button onclick="appendNumber('9')">9</button>
+      <button class="operator" onclick="chooseOperator('/')">/</button>
+
+      <button onclick="appendNumber('4')">4</button>
+      <button onclick="appendNumber('5')">5</button>
+      <button onclick="appendNumber('6')">6</button>
+      <button class="operator" onclick="chooseOperator('*')">*</button>
+
+      <button onclick="appendNumber('1')">1</button>
+      <button onclick="appendNumber('2')">2</button>
+      <button onclick="appendNumber('3')">3</button>
+      <button class="operator" onclick="chooseOperator('-')">-</button>
+
+      <button onclick="appendNumber('0')">0</button>
+      <button onclick="appendDecimal()">.</button>
+      <button class="equal" onclick="calculate()">=</button>
+      <button class="operator" onclick="chooseOperator('+')">+</button>
+
+      <button class="clear" onclick="clearDisplay()" style="grid-column: span 4;">CLEAR</button>
+    </div>
+    <div class="footer">&copy; 2025 Project by [Student Name]</div>
+  </div>
+
+  <script>
+    let display = document.getElementById('display');
+    let firstNumber = '';
+    let secondNumber = '';
+    let operator = null;
+    let resultDisplayed = false;
+
+    function appendNumber(num) {
+      if (resultDisplayed) {
+        display.textContent = num;
+        resultDisplayed = false;
+      } else {
+        display.textContent = display.textContent === '0' ? num : display.textContent + num;
+      }
+    }
+
+    function appendDecimal() {
+      if (!display.textContent.includes('.')) {
+        display.textContent += '.';
+      }
+    }
+
+    function chooseOperator(op) {
+      if (operator !== null) calculate();
+      firstNumber = display.textContent;
+      operator = op;
+      display.textContent = '';
+    }
+
+    function calculate() {
+      if (operator === null || display.textContent === '') return;
+      secondNumber = display.textContent;
+
+      let a = parseFloat(firstNumber);
+      let b = parseFloat(secondNumber);
+      let result;
+
+      if (operator === '+') result = a + b;
+      else if (operator === '-') result = a - b;
+      else if (operator === '*') result = a * b;
+      else if (operator === '/') {
+        if (b === 0) {
+          display.textContent = "Can't divide by 0!";
+          operator = null;
+          return;
+        }
+        result = a / b;
+      }
+
+      result = Math.round(result * 1000) / 1000;
+      display.textContent = result;
+      firstNumber = result;
+      operator = null;
+      resultDisplayed = true;
+    }
+
+    function clearDisplay() {
+      display.textContent = '0';
+      firstNumber = '';
+      secondNumber = '';
+      operator = null;
+      resultDisplayed = false;
+    }
+  </script>
+</body>
+</html>
