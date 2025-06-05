@@ -7,18 +7,32 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      margin: 0;
+      padding: 0;
       height: 100vh;
+      overflow: hidden;
+    }
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.4;
     }
     .calculator {
-      background: #fff;
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 16px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
       width: 300px;
       padding: 20px;
+      margin: 0 auto;
+      top: 50%;
+      transform: translateY(-50%);
     }
     .display {
       background: #000;
@@ -62,6 +76,13 @@
   </style>
 </head>
 <body>
+  <!-- Background Video -->
+  <video autoplay muted loop id="bgVideo">
+    <source src="https://cdn.pixabay.com/video/2019/10/24/28565-370774723_large.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- Calculator UI -->
   <div class="calculator">
     <div id="display" class="display">0</div>
     <div class="buttons">
