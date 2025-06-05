@@ -108,11 +108,22 @@
       color: #ccc;
       margin-top: 10px;
     }
+
+    @media (max-width: 576px) {
+      .display {
+        font-size: 1.8rem;
+        padding: 10px;
+      }
+      .buttons button {
+        padding: 12px;
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Background Video -->
-  <video autoplay muted loop id="bgVideo">
+  <video autoplay muted playsinline webkit-playsinline loop id="bgVideo">
     <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
@@ -211,6 +222,14 @@
       operator = null;
       resultDisplayed = false;
     }
+
+    // Try to play video via JS as fallback
+    document.addEventListener("DOMContentLoaded", function () {
+      const video = document.getElementById("bgVideo");
+      if (video) {
+        video.play().catch(err => console.warn("Autoplay failed:", err));
+      }
+    });
   </script>
 </body>
 </html>
