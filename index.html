@@ -11,7 +11,7 @@
       padding: 0;
       height: 100%;
       font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
+      background: #000;
     }
 
     #bgVideo {
@@ -24,14 +24,23 @@
       z-index: -1;
     }
 
+    .calculator-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
     .calculator {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 15px;
       padding: 20px;
       box-shadow: 0 0 15px rgba(0,0,0,0.3);
-      max-width: 320px;
-      width: 90%;
-      margin: 100px auto;
+      width: 100%;
+      max-width: 400px;
     }
 
     .display {
@@ -42,11 +51,12 @@
       text-align: right;
       border-radius: 10px;
       margin-bottom: 15px;
+      min-height: 50px;
     }
 
     .buttons button {
       width: 100%;
-      padding: 20px;
+      padding: 15px;
       font-size: 1.2rem;
       border: none;
       border-radius: 10px;
@@ -84,32 +94,34 @@
   </video>
 
   <!-- Calculator UI -->
-  <div class="calculator text-center">
-    <div id="display" class="display">0</div>
-    <div class="row gx-2 gy-2 buttons">
-      <div class="col-3"><button onclick="appendNumber('7')">7</button></div>
-      <div class="col-3"><button onclick="appendNumber('8')">8</button></div>
-      <div class="col-3"><button onclick="appendNumber('9')">9</button></div>
-      <div class="col-3"><button class="btn-operator" onclick="chooseOperator('/')">/</button></div>
+  <div class="calculator-wrapper">
+    <div class="calculator text-center">
+      <div id="display" class="display">0</div>
+      <div class="row gx-2 gy-2 buttons">
+        <div class="col-3"><button onclick="appendNumber('7')">7</button></div>
+        <div class="col-3"><button onclick="appendNumber('8')">8</button></div>
+        <div class="col-3"><button onclick="appendNumber('9')">9</button></div>
+        <div class="col-3"><button class="btn-operator" onclick="chooseOperator('/')">/</button></div>
 
-      <div class="col-3"><button onclick="appendNumber('4')">4</button></div>
-      <div class="col-3"><button onclick="appendNumber('5')">5</button></div>
-      <div class="col-3"><button onclick="appendNumber('6')">6</button></div>
-      <div class="col-3"><button class="btn-operator" onclick="chooseOperator('*')">*</button></div>
+        <div class="col-3"><button onclick="appendNumber('4')">4</button></div>
+        <div class="col-3"><button onclick="appendNumber('5')">5</button></div>
+        <div class="col-3"><button onclick="appendNumber('6')">6</button></div>
+        <div class="col-3"><button class="btn-operator" onclick="chooseOperator('*')">*</button></div>
 
-      <div class="col-3"><button onclick="appendNumber('1')">1</button></div>
-      <div class="col-3"><button onclick="appendNumber('2')">2</button></div>
-      <div class="col-3"><button onclick="appendNumber('3')">3</button></div>
-      <div class="col-3"><button class="btn-operator" onclick="chooseOperator('-')">-</button></div>
+        <div class="col-3"><button onclick="appendNumber('1')">1</button></div>
+        <div class="col-3"><button onclick="appendNumber('2')">2</button></div>
+        <div class="col-3"><button onclick="appendNumber('3')">3</button></div>
+        <div class="col-3"><button class="btn-operator" onclick="chooseOperator('-')">-</button></div>
 
-      <div class="col-3"><button onclick="appendNumber('0')">0</button></div>
-      <div class="col-3"><button onclick="appendDecimal()">.</button></div>
-      <div class="col-3"><button class="btn-equal" onclick="calculate()">=</button></div>
-      <div class="col-3"><button class="btn-operator" onclick="chooseOperator('+')">+</button></div>
+        <div class="col-3"><button onclick="appendNumber('0')">0</button></div>
+        <div class="col-3"><button onclick="appendDecimal()">.</button></div>
+        <div class="col-3"><button class="btn-equal" onclick="calculate()">=</button></div>
+        <div class="col-3"><button class="btn-operator" onclick="chooseOperator('+')">+</button></div>
 
-      <div class="col-12"><button class="btn-clear" onclick="clearDisplay()">CLEAR</button></div>
+        <div class="col-12"><button class="btn-clear" onclick="clearDisplay()">CLEAR</button></div>
+      </div>
+      <div class="footer">&copy; 2025 Project by jeric</div>
     </div>
-    <div class="footer">&copy; 2025 Project by Jeric</div>
   </div>
 
   <script>
